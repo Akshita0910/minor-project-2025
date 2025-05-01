@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SlotSmart - Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: rgb(14, 9, 68);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            color: #ffffff;
+        }
+        
+        .welcome-text {
+            font-family: 'Ibarra Real Nova', serif;
+            padding: 40px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 0;
+            line-height: 1.2;
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin: 10px 0 0 0;
+        }
+        
+        .login-container {
+            background-color: white;
+            width: 350px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 40px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .login-content {
+            max-width: 350px;
+        }
+        
+        .signin-text {
+            font-size: 28px;
+            margin-bottom: 25px;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+        
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        
+        .login-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        
+        .login-btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .required::after {
+            content: " *";
+            color: #e74c3c;
+        }
+
+        .captcha-container {
+            margin: 15px 0;
+        }
+        
+        .captcha-image {
+            width: 200px; /* Reduced from original size */
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome-text">
+        <h1>Welcome to SlotSmart !</h1>
+        <h2>Schedule your classes with ease</h2>
+    </div>
+    
+    <div class="login-container">
+        <div class="login-content">
+            <div class="signin-text">Sign in to your Account</div>
+            
+            <form>
+                <div class="form-group">
+                    <label for="userid" class="required">USER ID</label>
+                    <input type="text" id="userid" placeholder="">
+                </div>
+                
+                <div class="captcha-container">
+                    <img src="https://miro.medium.com/v2/resize:fit:600/1*MHqIWdansPvRMEmUK2KNPw.png" alt="CAPTCHA" class="captcha-image">
+                </div>
+                
+                <div class="form-group">
+                    <label for="captcha" class="required">Enter the text as shown in the image</label>
+                    <input type="text" id="captcha">
+                </div>
+                
+                <button type="submit" class="login-btn">LOGIN</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

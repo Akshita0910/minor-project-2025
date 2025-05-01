@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JUIT Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background-color: #0A154B;
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+        }
+        
+        h1 {
+            color: #fcfeff;
+            margin: 0;
+            font-size: 24px;
+        }
+        
+        .university-image {
+            padding: 20px 0;
+            width: 120px;
+            margin: 0 auto;
+            height: auto;
+            display: block;
+        }
+        
+        .title-section {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .title-section h2 {
+            font-family: 'Ibarra Real Nova', serif;
+            font-size: 28px;
+            margin: 0;
+            color: #333;
+        }
+        
+        .title-section h3 {
+            font-family: 'Ibarra Real Nova', serif;
+            font-size: 18px;
+            margin: 5px 0 0 0;
+            color: #666;
+            font-weight: normal;
+        }
+        
+        .portal-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+            padding: 20px;
+            background-color: white;
+            text-align: center;
+        }
+        
+        .portal-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+            margin: 20px 0;
+            color: #000000;
+            text-decoration: none;
+        }
+        
+        .portal-button {
+            padding: 20px;
+            background-color: #ffcbd3;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            width: 60%;
+            text-align: center;
+        }
+        
+        .portal-button span {
+            color: #0A154B;
+            font-weight: bold;
+        }
+        
+        .portal-button span::after {
+            content: " >";
+            color: #797777;
+        }
+        
+        .portal-button:hover {
+            background-color: #ffb6c1;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 4px rgba(0,0,0,0.1);
+        }
+        
+        .footer {
+            font-size: 12px;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            background-color: #0A154B;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>SLOTSMART - SLOT MANAGEMENT SYSTEM</h1>
+    </div>
+    
+    <div class="university-image">
+        <img src="https://www.juit.ac.in/front/images/logo.jpg" alt="JUIT Logo" width="120">    
+    </div>
+        
+    <div class="title-section">
+        <h2>SlotSmart</h2>
+        <h3>Intelligent Slot Booking System</h3>
+    </div>
+    
+    <div class="portal-container">
+        <a href="#" class="portal-link">
+            Click here for Student portal
+            <div class="portal-button">
+                <span>Student Portal</span>
+            </div>
+        </a>
+        
+        <a href="#" class="portal-link">
+            Click here for Faculty portal
+            <div class="portal-button">
+                <span>Faculty Portal</span> 
+            </div>
+        </a>
+
+        <a href="#" class="portal-link">
+            Click here for Admin portal
+            <div class="portal-button">
+                <span>Admin Portal</span>
+            </div>
+        </a>
+    </div>
+    
+    <div class="footer">
+        Powered By: JIL Information Technology Ltd.
+    </div>
+</body>
+</html>

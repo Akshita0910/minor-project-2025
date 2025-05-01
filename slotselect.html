@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule a Class</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        .header-container {
+            background-color: #f8f9fa;
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            display: flex;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            flex-grow: 1;
+        }
+        
+        .nav-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            color: #555;
+            font-weight: 500;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-tab.active {
+            color:#0a1155;
+            font-weight: bold;
+        }
+        
+        .nav-tab.active:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: #0a1155;
+        }
+        
+        .nav-tab:hover:not(.active) {
+            background-color: rgba(0,0,0,0.05);
+        }
+        
+        .content {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .page-title {
+            font-size: 24px;
+            color: #333;
+            margin: 20px auto;
+            max-width: 1000px;
+            font-weight: bold;
+            padding: 0 20px;
+        }
+        
+        .slots-title {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        .slots-container {
+            margin-top: 20px;
+        }
+        
+        .slot {
+            padding: 15px;
+            margin-bottom: 10px;
+            background-color: #f8f9fa;
+            border-radius: 6px;
+            border-left: 4px solid #ffffff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+        
+        .slot-radio {
+            width: 18px;
+            height: 18px;
+            margin-left: 15px;
+        }
+        
+        .slot-info {
+            flex-grow: 1;
+        }
+        
+        .slot-time {
+            font-weight: bold;
+            color: #000000;
+        }
+        
+        .slot-location {
+            color: #555;
+        }
+        
+        .submit-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .submit-button {
+            background-color: #0a1155;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-button:hover {
+            background-color: #0a1155e6;
+        }
+    </style>
+</head>
+<body>
+   
+    
+    <div class="header-container">
+        <div class="header">
+            <div class="nav-tabs">
+                <div class="nav-tab">Home</div>
+                <div class="nav-tab">Dashboard</div>
+                <div class="nav-tab active">Schedule a class</div>
+            </div>
+        </div>
+    </div>
+    <div class="page-title">Slots Available :</div>
+    <div class="content">
+        <!-- <div class="slots-title">Slots Available:</div> -->
+        
+        <form class="slots-container">
+            <label class="slot">
+                <div class="slot-info">
+                    <span class="slot-time">10:00 - 11:00</span> : <span class="slot-location">CR-7</span>
+                </div>
+                <input type="radio" name="timeSlot" class="slot-radio">
+            </label>
+            
+            <label class="slot">
+                <div class="slot-info">
+                    <span class="slot-time">1:00 - 2:00</span> : <span class="slot-location">LT-2</span>
+                </div>
+                <input type="radio" name="timeSlot" class="slot-radio">
+            </label>
+        </form>
+        
+        <div class="submit-container">
+            <button class="submit-button">Schedule Selected Slot</button>
+        </div>
+    </div>
+</body>
+</html>
