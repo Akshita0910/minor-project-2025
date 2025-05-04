@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+      
+        .header-container {
+            background-color: #f8f9fa;
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .nav-tabs {
+            display: flex;
+            margin-right: auto;
+        }
+        
+        .nav-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            color: #555;
+            font-weight: 500;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-tab.active {
+            color:#0a1155;
+            font-weight: bold;
+        }
+        
+        .nav-tab.active:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: #0a1155;
+        }
+        
+        .nav-tab:hover:not(.active) {
+            background-color: rgba(0,0,0,0.05);
+        }
+        
+        .settings {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-left: auto;
+        }
+        
+        .icon {
+            width: 22px;
+            height: 22px;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+        
+        .icon:hover {
+            opacity: 1;
+        }
+        
+        .profile-icon {
+            border-radius: 50%;
+        }
+        
+        .content {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        
+        .welcome {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        .admin-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .admin-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .admin-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .card-title {
+            font-size: 18px;
+            color: #0a1155;
+            margin-bottom: 15px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .card-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+        
+        .card-description {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .card-button {
+            background-color: #0a1155;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+        
+        .card-button:hover {
+            background-color: #131a6e;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .modal-title {
+            font-size: 20px;
+            color: #0a1155;
+            font-weight: bold;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #555;
+        }
+        
+        .form-group input, 
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .secondary-button {
+            background-color: #f0f0f0;
+            color: #333;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .primary-button {
+            background-color: #0a1155;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-container">
+        <div class="header">
+            <div class="nav-tabs">
+                <div class="nav-tab">Home</div>
+                <!-- <div class="nav-tab">Dashboard</div> -->
+                <div class="nav-tab active">Admin Portal</div>
+            </div>
+            <div class="settings">
+                <img class="icon notification-icon" src="https://static.vecteezy.com/system/resources/previews/002/359/770/non_2x/bell-icon-free-vector.jpg" alt="Notifications">
+                <img class="icon message-icon" src="https://marketplace.canva.com/cxSS4/MAEZ1_cxSS4/1/tl/canva-message-outline-icon-MAEZ1_cxSS4.png" alt="Messages">
+                <img class="icon profile-icon" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSS71WIdQYF_E_eeAs7Hbjb1FKpbJD6PZIEcg&s" alt="Profile">
+            </div>
+        </div>
+    </div>
+    
+    <div class="content">
+        <div class="welcome">Admin Portal</div>
+        
+        <div class="admin-options">
+            <div class="admin-card">
+                <div class="card-title">
+                    <img class="card-icon" src="https://cdn-icons-png.flaticon.com/512/3137/3137175.png" alt="Student">
+                    Add Student
+                </div>
+                <div class="card-description">
+                    Add new students to the system by entering their details including name, ID, contact information, and course enrollment.
+                </div>
+                <button class="card-button" onclick="openModal('studentModal')">Add Student</button>
+            </div>
+            
+            <div class="admin-card">
+                <div class="card-title">
+                    <img class="card-icon" src="https://cdn-icons-png.flaticon.com/512/3137/3137179.png" alt="Faculty">
+                    Add Faculty
+                </div>
+                <div class="card-description">
+                    Register new faculty members with their personal details, department, courses they teach, and availability.
+                </div>
+                <button class="card-button" onclick="openModal('facultyModal')">Add Faculty</button>
+            </div>
+            
+            <div class="admin-card">
+                <div class="card-title">
+                    <img class="card-icon" src="https://cdn-icons-png.flaticon.com/512/3652/3652191.png" alt="Timetable">
+                    Upload Timetable
+                </div>
+                <div class="card-description">
+                    Upload or update the academic timetable for the current semester in CSV or Excel format.
+                </div>
+                <button class="card-button" onclick="openModal('timetableModal')">Upload Timetable</button>
+            </div>
+            
+            <div class="admin-card">
+                <div class="card-title">
+                    <img class="card-icon" src="https://cdn-icons-png.flaticon.com/512/1570/1570887.png" alt="Courses">
+                    Manage Courses
+                </div>
+                <div class="card-description">
+                    Add, edit, or remove courses from the system. Set course codes, names, credits, and prerequisites.
+                </div>
+                <button class="card-button" onclick="openModal('coursesModal')">Manage Courses</button>
+            </div>
+            
+            <div class="admin-card">
+                <div class="card-title">
+                    <img class="card-icon" src="https://cdn-icons-png.flaticon.com/512/1584/1584892.png" alt="Rooms">
+                    Manage Rooms
+                </div>
+                <div class="card-description">
+                    Add or edit classroom information including room numbers, capacities, and available facilities.
+                </div>
+                <button class="card-button" onclick="openModal('roomsModal')">Manage Rooms</button>
+            </div>
+            
+            <div class="admin-card">
+                <div class="card-title">
+                    <img class="card-icon" src="https://cdn-icons-png.flaticon.com/512/1570/1570937.png" alt="Reports">
+                    Generate Reports
+                </div>
+                <div class="card-description">
+                    Generate various reports including student attendance, faculty workload, and room utilization.
+                </div>
+                <button class="card-button" onclick="openModal('reportsModal')">Generate Reports</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add Student Modal -->
+    <div id="studentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Add New Student</div>
+                <button class="close-modal" onclick="closeModal('studentModal')">&times;</button>
+            </div>
+            <form id="studentForm">
+                <div class="form-group">
+                    <label for="studentId">Student ID</label>
+                    <input type="text" id="studentId" required>
+                </div>
+                <div class="form-group">
+                    <label for="studentName">Full Name</label>
+                    <input type="text" id="studentName" required>
+                </div>
+                <div class="form-group">
+                    <label for="studentEmail">Email</label>
+                    <input type="email" id="studentEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="studentPhone">Phone Number</label>
+                    <input type="tel" id="studentPhone">
+                </div>
+                <div class="form-group">
+                    <label for="studentProgram">Program</label>
+                    <select id="studentProgram" required>
+                        <option value="">Select Program</option>
+                        <option value="CS">Computer Science</option>
+                        <option value="EE">Electrical Engineering</option>
+                        <option value="ME">Mechanical Engineering</option>
+                        <option value="CE">Civil Engineering</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="studentSemester">Semester</label>
+                    <select id="studentSemester" required>
+                        <option value="">Select Semester</option>
+                        <option value="1">1st Semester</option>
+                        <option value="2">2nd Semester</option>
+                        <option value="3">3rd Semester</option>
+                        <option value="4">4th Semester</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="secondary-button" onclick="closeModal('studentModal')">Cancel</button>
+                    <button type="submit" class="primary-button">Add Student</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Add Faculty Modal -->
+    <div id="facultyModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Add New Faculty</div>
+                <button class="close-modal" onclick="closeModal('facultyModal')">&times;</button>
+            </div>
+            <form id="facultyForm">
+                <div class="form-group">
+                    <label for="facultyId">Faculty ID</label>
+                    <input type="text" id="facultyId" required>
+                </div>
+                <div class="form-group">
+                    <label for="facultyName">Full Name</label>
+                    <input type="text" id="facultyName" required>
+                </div>
+                <div class="form-group">
+                    <label for="facultyEmail">Email</label>
+                    <input type="email" id="facultyEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="facultyPhone">Phone Number</label>
+                    <input type="tel" id="facultyPhone">
+                </div>
+                <div class="form-group">
+                    <label for="facultyDepartment">Department</label>
+                    <select id="facultyDepartment" required>
+                        <option value="">Select Department</option>
+                        <option value="CS">Computer Science</option>
+                        <option value="EE">Electrical Engineering</option>
+                        <option value="ME">Mechanical Engineering</option>
+                        <option value="CE">Civil Engineering</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="facultyDesignation">Designation</label>
+                    <select id="facultyDesignation" required>
+                        <option value="">Select Designation</option>
+                        <option value="prof">Professor</option>
+                        <option value="asso">Associate Professor</option>
+                        <option value="assi">Assistant Professor</option>
+                        <option value="lect">Lecturer</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="secondary-button" onclick="closeModal('facultyModal')">Cancel</button>
+                    <button type="submit" class="primary-button">Add Faculty</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Upload Timetable Modal -->
+    <div id="timetableModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Upload Timetable</div>
+                <button class="close-modal" onclick="closeModal('timetableModal')">&times;</button>
+            </div>
+            <form id="timetableForm">
+                <div class="form-group">
+                    <label for="timetableSemester">Semester</label>
+                    <select id="timetableSemester" required>
+                        <option value="">Select Semester</option>
+                        <option value="1">1st Semester</option>
+                        <option value="2">2nd Semester</option>
+                        <option value="3">3rd Semester</option>
+                        <option value="4">4th Semester</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="timetableFile">Timetable File (CSV/Excel)</label>
+                    <input type="file" id="timetableFile" accept=".csv,.xlsx,.xls" required>
+                </div>
+                <div class="form-group">
+                    <label for="timetableNotes">Notes</label>
+                    <textarea id="timetableNotes" rows="3"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="secondary-button" onclick="closeModal('timetableModal')">Cancel</button>
+                    <button type="submit" class="primary-button">Upload Timetable</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+        
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            if (event.target.className === 'modal') {
+                event.target.style.display = 'none';
+            }
+        }
+        
+        // Form submission handlers
+        document.getElementById('studentForm').onsubmit = function(e) {
+            e.preventDefault();
+            alert('Student added successfully!');
+            closeModal('studentModal');
+            // Here you would typically send data to server
+        }
+        
+        document.getElementById('facultyForm').onsubmit = function(e) {
+            e.preventDefault();
+            alert('Faculty added successfully!');
+            closeModal('facultyModal');
+        }
+        
+        document.getElementById('timetableForm').onsubmit = function(e) {
+            e.preventDefault();
+            alert('Timetable uploaded successfully!');
+            closeModal('timetableModal');
+        }
+    </script>
+</body>
+</html>
