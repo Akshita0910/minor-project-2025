@@ -3,29 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Schedule</title>
+    <title>Reschedule Class</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
-            padding: 0;
+            padding: 20px;
             background-color: #f5f5f5;
-            color: #333;
         }
-      
-        .header-container {
-            background-color: #f8f9fa;
-            padding: 10px 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
+        
         .header {
             display: flex;
             align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
+            margin-bottom: 20px;
+            background-color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-
+        
         .nav-tabs {
             display: flex;
             flex-grow: 1;
@@ -41,7 +37,7 @@
         }
         
         .nav-tab.active {
-            color:#0a1155;
+            color: #1a237e;
             font-weight: bold;
         }
         
@@ -52,23 +48,19 @@
             left: 0;
             width: 100%;
             height: 3px;
-            background-color: #0a1155;
-        }
-        
-        .nav-tab:hover:not(.active) {
-            background-color: rgba(0,0,0,0.05);
+            background-color: #1a237e;
         }
         
         .settings {
+            margin-left: auto;
             display: flex;
             align-items: center;
             gap: 20px;
-            padding-left: 20px;
         }
         
         .icon {
-            width: 22px;
-            height: 22px;
+            width: 24px;
+            height: 24px;
             opacity: 0.8;
             transition: opacity 0.2s;
         }
@@ -81,140 +73,382 @@
             border-radius: 50%;
         }
         
-        .content {
-            max-width: 1200px;
-            margin: 30px auto;
-            padding: 0 20px;
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 25px;
+            border: 1px solid #ddd;
+            max-width: 800px;
+            margin: 0 auto;
         }
         
-        .welcome {
+        .page-title {
             font-size: 24px;
             color: #333;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             font-weight: bold;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
         }
         
-        .day-selector {
-            margin-bottom: 30px;
+        .class-info {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 25px;
         }
         
-        select {
+        .info-row {
+            display: flex;
+            margin-bottom: 8px;
+        }
+        
+        .info-label {
+            font-weight: bold;
+            width: 120px;
+            color: #555;
+        }
+        
+        .info-value {
+            flex: 1;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+        
+        .form-group input, 
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
             padding: 10px 15px;
             border-radius: 6px;
             border: 1px solid #ddd;
             font-size: 16px;
-            width: 220px;
-            background-color: white;
         }
         
-        .divider {
-            height: 1px;
-            background-color: #eee;
-            margin: 25px 0;
+        .form-row {
+            display: flex;
+            gap: 20px;
         }
         
-        .time-slot-tab {
-            background-color:#0a1155;
-            color: white;
-            padding: 12px 20px;
+        .form-col {
+            flex: 1;
+        }
+        
+        .reason-input {
+            height: 100px;
+        }
+        
+        .available-slots {
+            margin-top: 30px;
+        }
+        
+        .slots-title {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #333;
+            font-weight: bold;
+        }
+        
+        .slot-card {
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .slot-card:hover {
+            border-color: #1a237e;
+            background-color: #f0f3ff;
+        }
+        
+        .slot-card.selected {
+            border-color: #1a237e;
+            background-color: #e6f0ff;
+        }
+        
+        .slot-time {
+            font-weight: bold;
+            color: #1a237e;
+        }
+        
+        .slot-details {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .alternative-slot {
+            background-color: #fff3cd;
+            border-color: #ffeeba;
+        }
+        
+        .alternative-slot:hover {
+            background-color: #ffecb3;
+        }
+        
+        .action-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 12px 25px;
             border-radius: 6px;
             font-size: 16px;
-            display: inline-block;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            text-align: center;
-            width: 200px;
-            margin: 0 auto;
-            display: block;
             cursor: pointer;
+            border: none;
             transition: background-color 0.3s;
         }
         
-        .time-slot-tab:hover {
-            background-color: #0a1155e6;
+        .btn-primary {
+            background-color: #1a237e;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #303f9f;
+        }
+        
+        .btn-secondary {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #e0e0e0;
+        }
+        
+        .status-message {
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .error-message {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
         }
     </style>
 </head>
 <body>
-    <div class="header-container">
-        <div class="header">
-            <div class="nav-tabs">
-                <div class="nav-tab">Home</div>
-                <div class="nav-tab">Dashboard</div>
-                <div class="nav-tab active">My Schedule</div>
-            </div>
-            <div class="settings">
-                <img class="icon notification-icon" src="https://static.vecteezy.com/system/resources/previews/002/359/770/non_2x/bell-icon-free-vector.jpg" alt="Notifications">
-                <img class="icon message-icon" src="https://marketplace.canva.com/cxSS4/MAEZ1_cxSS4/1/tl/canva-message-outline-icon-MAEZ1_cxSS4.png" alt="Messages">
-                <img class="icon profile-icon" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSS71WIdQYF_E_eeAs7Hbjb1FKpbJD6PZIEcg&s" alt="Profile">
-            </div>
+    <div class="header">
+        <div class="nav-tabs">
+            <div class="nav-tab">Home</div>
+            <div class="nav-tab">Dashboard</div>
+            <div class="nav-tab active">Schedule a Class</div>
+        </div>
+        <div class="settings">
+            <img class="icon notification-icon" src="https://static.vecteezy.com/system/resources/previews/002/359/770/non_2x/bell-icon-free-vector.jpg" alt="Notifications">
+            <img class="icon message-icon" src="https://marketplace.canva.com/cxSS4/MAEZ1_cxSS4/1/tl/canva-message-outline-icon-MAEZ1_cxSS4.png" alt="Messages">
+            <img class="icon profile-icon" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSS71WIdQYF_E_eeAs7Hbjb1FKpbJD6PZIEcg&s" alt="Profile">
         </div>
     </div>
     
-    <div class="content">
-        <div class="welcome">My Schedule</div>
+    <div class="container">
+        <div class="page-title">Reschedule Class</div>
         
-        <div class="day-selector">
-            <label for="day">Select day</label><br>
-            <select id="day">
-                <option>Monday</option>
-                <option>Tuesday</option>
-                <option>Wednesday</option>
-                <option>Thursday</option>
-                <option>Friday</option>
-                <option>Saturday</option>
-                <option>Sunday</option>
-            </select>
-            <h1></h1>
-            <label for="time">Select time</label><br>
-
-            <select id="time">
-                <option>9:00-10:00</option>
-                <option>10:00-11:00</option>
-                <option>11:00-12:00</option>
-                <option>12:00-1:00</option>
-                <option>1:00-2:00</option>
-                <option>2:00-3:00</option>
-                <option>3:00-4:00</option>
-                <option>4:00-5:00</option>
-                <option>5:00-6:00</option>
-            </select>
+        <div class="class-info">
+            <div class="info-row">
+                <div class="info-label">Course:</div>
+                <div class="info-value">Data Structures (P-18B17CL271)</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Class Type:</div>
+                <div class="info-value">Lecture</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Original Time:</div>
+                <div class="info-value">Monday, 9:00 AM - 10:00 AM</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Room:</div>
+                <div class="info-value">CR-5</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Batch:</div>
+                <div class="info-value">24A11</div>
+            </div>
+        </div>
         
-        <h1></h1>
-        <label for="time">Select Subject</label><br>
-
-        <select id="subject">
-            <option>P-18B17CL271</option>
-            <option>L-18B11CL211</option>
-            <option>P-19B11CI111</option>
-            <option>L-19B11CI111</option>
+        <div class="form-group">
+            <label for="reason">Reason for Rescheduling</label>
+            <textarea id="reason" class="reason-input" placeholder="Please specify the reason for rescheduling this class..."></textarea>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-col">
+                <div class="form-group">
+                    <label for="new-date">New Date</label>
+                    <input type="date" id="new-date">
+                </div>
+            </div>
+            <div class="form-col">
+                <div class="form-group">
+                    <label for="new-time">New Time</label>
+                    <select id="new-time">
+                        <option value="">Select Time Slot</option>
+                        <option value="9:00-10:00">9:00 AM - 10:00 AM</option>
+                        <option value="10:00-11:00">10:00 AM - 11:00 AM</option>
+                        <option value="11:00-12:00">11:00 AM - 12:00 PM</option>
+                        <option value="12:00-1:00">12:00 PM - 1:00 PM</option>
+                        <option value="1:00-2:00">1:00 PM - 2:00 PM</option>
+                        <option value="2:00-3:00">2:00 PM - 3:00 PM</option>
+                        <option value="3:00-4:00">3:00 PM - 4:00 PM</option>
+                        <option value="4:00-5:00">4:00 PM - 5:00 PM</option>
+                        <option value="5:00-6:00">5:00 PM - 6:00 PM</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <div class="available-slots">
+            <div class="slots-title">Available Time Slots</div>
             
-
-                  </select>
-
-    <h1></h1>
-    <label for="Select batch/batches">Select batch/batches</label><br>
-
-    <select id="batch">
-        <option>24A11</option>
-        <option>24A12</option>
-        <option>24A13</option>
-        <option>24A14</option>
-        <option>24A15</option>
-        <option>24A16</option>
-        <option>24A17</option>
-        <option>24A18</option>
-        <option>24A19</option>
-        <option>24A110</option>
-        <option>24A111</option>
-        <option>24A112</option>
-        <option>24J11</option>
-        <option>24J12</option>
-        <option>24K11</option>
-    </select>
-</div>
-        <div class="divider"></div>
+            <div class="slot-card" onclick="selectSlot(this)">
+                <div class="slot-time">Wednesday, 11:00 AM - 12:00 PM</div>
+                <div class="slot-details">Room: CR-3 | Status: Available</div>
+            </div>
+            
+            <div class="slot-card" onclick="selectSlot(this)">
+                <div class="slot-time">Thursday, 2:00 PM - 3:00 PM</div>
+                <div class="slot-details">Room: LAB-1 | Status: Available</div>
+            </div>
+            
+            <div class="slot-card alternative-slot" onclick="selectSlot(this)">
+                <div class="slot-time">Saturday, 2:00 PM - 3:00 PM</div>
+                <div class="slot-details">Room: CR-5 | Status: Alternative Slot</div>
+            </div>
+            
+            <div class="slot-card alternative-slot" onclick="selectSlot(this)">
+                <div class="slot-time">Saturday, 3:00 PM - 4:00 PM</div>
+                <div class="slot-details">Room: CR-5 | Status: Alternative Slot</div>
+            </div>
+        </div>
         
-        <div class="time-slot-tab">Reschedule Class</div>
+        <div id="successMessage" class="status-message success-message">
+            Class successfully rescheduled to Wednesday, 11:00 AM - 12:00 PM in CR-3
+        </div>
+        
+        <div id="errorMessage" class="status-message error-message">
+            Unable to reschedule at selected time. Please choose an alternative slot.
+        </div>
+        
+        <div class="action-buttons">
+            <button class="btn btn-secondary" onclick="cancelReschedule()">Cancel</button>
+            <button class="btn btn-primary" onclick="submitReschedule()">Reschedule Class</button>
+        </div>
     </div>
+
+    <script>
+        // Track selected slot
+        let selectedSlot = null;
+        
+        function selectSlot(element) {
+            // Remove selection from all slots
+            document.querySelectorAll('.slot-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Add selection to clicked slot
+            element.classList.add('selected');
+            selectedSlot = element;
+            
+            // Update form fields with selected slot data
+            const slotText = element.querySelector('.slot-time').textContent;
+            const [day, timeRange] = slotText.split(', ');
+            const [startTime, endTime] = timeRange.split(' - ');
+            
+            // Convert day to date (simplified for demo)
+            const dateMap = {
+                'Wednesday': getNextWednesday(),
+                'Thursday': getNextThursday(),
+                'Saturday': getNextSaturday()
+            };
+            
+            document.getElementById('new-date').valueAsDate = dateMap[day];
+            document.getElementById('new-time').value = `${startTime}-${endTime}`;
+        }
+        
+        function submitReschedule() {
+            const reason = document.getElementById('reason').value;
+            const newDate = document.getElementById('new-date').value;
+            const newTime = document.getElementById('new-time').value;
+            
+            if (!reason || !newDate || !newTime) {
+                showError('Please fill all fields and select a time slot');
+                return;
+            }
+            
+            // Simulate successful rescheduling (in real app, this would be an API call)
+            if (selectedSlot && !selectedSlot.classList.contains('alternative-slot')) {
+                showSuccess();
+            } else {
+                showError('Unable to reschedule at selected time. Please choose an alternative slot.');
+            }
+        }
+        
+        function cancelReschedule() {
+            // In a real app, this would return to previous page
+            alert('Rescheduling cancelled');
+        }
+        
+        function showSuccess() {
+            document.getElementById('successMessage').style.display = 'block';
+            document.getElementById('errorMessage').style.display = 'none';
+            
+            // In a real app, would redirect or update UI
+            setTimeout(() => {
+                alert('Class successfully rescheduled!');
+            }, 500);
+        }
+        
+        function showError(message) {
+            const errorElement = document.getElementById('errorMessage');
+            errorElement.textContent = message || 'Unable to reschedule at selected time. Please choose an alternative slot.';
+            errorElement.style.display = 'block';
+            document.getElementById('successMessage').style.display = 'none';
+        }
+        
+        // Helper functions for demo
+        function getNextWednesday() {
+            const date = new Date();
+            date.setDate(date.getDate() + ((3 + 7 - date.getDay()) % 7));
+            return date;
+        }
+        
+        function getNextThursday() {
+            const date = new Date();
+            date.setDate(date.getDate() + ((4 + 7 - date.getDay()) % 7));
+            return date;
+        }
+        
+        function getNextSaturday() {
+            const date = new Date();
+            date.setDate(date.getDate() + ((6 + 7 - date.getDay()) % 7));
+            return date;
+        }
+    </script>
 </body>
 </html>
