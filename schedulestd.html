@@ -9,7 +9,528 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f5f5f5;
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Schedule</title>
+  <style>
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.header-container {
+    background-color: #f8f9fa;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.nav-tabs {
+    display: flex;
+    margin-right: auto;
+}
+
+.nav-tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    color: #555;
+    font-weight: 500;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.nav-tab.active {
+    color:#0a1155;
+    font-weight: bold;
+}
+
+.nav-tab.active:after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #0a1155;
+}
+
+.nav-tab:hover:not(.active) {
+    background-color: rgba(0,0,0,0.05);
+}
+
+.settings {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-left: auto;
+}
+
+.icon {
+    width: 22px;
+    height: 22px;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.icon:hover {
+    opacity: 1;
+}
+
+.profile-icon {
+    border-radius: 50%;
+}
+
+.content {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.welcome {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.day-selector {
+    margin-bottom: 30px;
+}
+
+select {
+    padding: 10px 15px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    width: 220px;
+    background-color: white;
+}
+
+.divider {
+    height: 1px;
+    background-color: #eee;
+    margin: 25px 0;
+}
+
+.time-slot-tab {
+    background-color:#0a1155;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-size: 16px;
+    display: block;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 15px auto;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.time-slot-tab:hover {
+    transform: translateY(-2px);
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.modal-title {
+    font-size: 20px;
+    color: #0a1155;
+    font-weight: bold;
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #555;
+}
+
+.form-group input, 
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.secondary-button {
+    background-color: #f0f0f0;
+    color: #333;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.primary-button {
+    background-color: #0a1155;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Schedule table styles */
+.schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.schedule-table th, 
+.schedule-table td {
+    padding: 12px 15px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.schedule-table th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+    color: #0a1155;
+}
+
+.schedule-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.schedule-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.class-slot {
+    background-color: #e6f7ff;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.class-slot:hover {
+    background-color: #d0ebff;
+}
+
+.lecture {
+    background-color: #e6f7ff;
+}
+
+.lab {
+    background-color: #e6ffe6;
+}
+
+.rescheduled {
+    position: relative;
+}
+
+.rescheduled::after {
+    content: "Rescheduled";
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    font-size: 10px;
+    color: #ff7b25;
+    font-weight: bold;
+}
+
+    /* Your existing CSS remains unchanged */
+    /* ... (same as your original code up to .faculty-name) */
+    .faculty-name {
+        font-size: 12px;
+        color: #666;
+        margin-top: 3px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header-container">
+    <div class="header">
+      <div class="nav-tabs">
+        <div class="nav-tab">Home</div>
+        <div class="nav-tab">Dashboard</div>
+        <div class="nav-tab active">My Schedule</div>
+      </div>
+      <div class="settings">
+        <img class="icon notification-icon" src="https://static.vecteezy.com/system/resources/previews/002/359/770/non_2x/bell-icon-free-vector.jpg" alt="Notifications">
+        <img class="icon message-icon" src="https://marketplace.canva.com/cxSS4/MAEZ1_cxSS4/1/tl/canva-message-outline-icon-MAEZ1_cxSS4.png" alt="Messages">
+        <img class="icon profile-icon" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSS71WIdQYF_E_eeAs7Hbjb1FKpbJD6PZIEcg&s" alt="Profile">
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="welcome">My Schedule</div>
+    <div class="day-selector">
+      <label for="day">Select day</label><br>
+      <select id="day" onchange="updateSchedule()">
+        <option>Monday</option>
+        <option>Tuesday</option>
+        <option>Wednesday</option>
+        <option>Thursday</option>
+        <option>Friday</option>
+        <option selected>Saturday</option>
+        <option>Sunday</option>
+      </select>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="time-slot-tab" onclick="openModal('rescheduleModal')">
+      Notice: Data Structures Lab rescheduled to Thursday 2:00-4:00 (CL-3)
+    </div>
+
+    <table class="schedule-table">
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th>Monday</th>
+          <th>Tuesday</th>
+          <th>Wednesday</th>
+          <th>Thursday</th>
+          <th>Friday</th>
+          <th>Saturday</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>9:00 - 10:00</td>
+          <td class="class-slot lecture" data-course="Data Structures" data-type="Lecture" data-time="9:00 - 10:00" data-room="CR-5" data-faculty="Nancy Singla" onclick="openClassDetails(this)">
+            Data Structures (CR-5)
+            <div class="faculty-name">Nancy Singla</div>
+          </td>
+          <td class="class-slot lecture" data-course="C Programming" data-type="Lecture" data-time="9:00 - 10:00" data-room="CR-3" data-faculty="Ravindra Bhatt" onclick="openClassDetails(this)">
+            C Programming (CR-3)
+            <div class="faculty-name">Ravindra Bhatt</div>
+          </td>
+          <td></td>
+          <td class="class-slot lecture" data-course="Data Structures" data-type="Lecture" data-time="9:00 - 10:00" data-room="CR-2" data-faculty="Nancy Singla" onclick="openClassDetails(this)">
+            Data Structures (CR-2)
+            <div class="faculty-name">Nancy Singla</div>
+          </td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>10:00 - 11:00</td>
+          <td></td>
+          <td class="class-slot lecture" data-course="Data Structures" data-type="Lecture" data-time="10:00 - 11:00" data-room="CR-3" data-faculty="Ayush Sharma" onclick="openClassDetails(this)">
+            Data Structures (CR-3)
+            <div class="faculty-name">Ayush Sharma</div>
+          </td>
+          <td class="class-slot lecture" data-course="C Programming" data-type="Lecture" data-time="10:00 - 11:00" data-room="CR-5" data-faculty="Faisal Firdous" onclick="openClassDetails(this)">
+            C Programming (CR-5)
+            <div class="faculty-name">Faisal Firdous</div>
+          </td>
+          <td></td>
+          <td class="class-slot lecture rescheduled" data-course="Data Structures" data-type="Lecture" data-time="10:00 - 11:00" data-room="CL-7" data-faculty="Ayush Sharma" data-status="Rescheduled" onclick="openClassDetails(this)">
+            Data Structures (CL-7)
+            <div class="faculty-name">Ayush Sharma</div>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>11:00 - 12:00</td>
+          <td class="class-slot lab" data-course="C Programming Lab" data-type="Lab" data-time="11:00 - 12:00" data-room="CL-1" data-faculty="Amol Vasudeva" onclick="openClassDetails(this)">
+            C Programming Lab (CL-1)
+            <div class="faculty-name">Amol Vasudeva</div>
+          </td>
+          <td></td>
+          <td class="class-slot lab" data-course="Data Structures Lab" data-type="Lab" data-time="11:00 - 12:00" data-room="CL-2" data-faculty="Ayush Sharma" onclick="openClassDetails(this)">
+            Data Structures Lab (CL-2)
+            <div class="faculty-name">Ayush Sharma</div>
+          </td>
+          <td></td>
+          <td></td>
+          <td class="class-slot lab" data-course="C Programming Lab" data-type="Lab" data-time="11:00 - 12:00" data-room="CL-1" data-faculty="Faisal Firdous" onclick="openClassDetails(this)">
+            C Programming Lab (CL-1)
+            <div class="faculty-name">Faisal Firdous</div>
+          </td>
+        </tr>
+        <tr>
+          <td>2:00 - 4:00</td>
+          <td></td>
+          <td class="class-slot lab" data-course="Data Structures Lab" data-type="Lab" data-time="2:00 - 4:00" data-room="CL-3" data-faculty="Nancy Singla" onclick="openClassDetails(this)">
+            Data Structures Lab (CL-3)
+            <div class="faculty-name">Nancy Singla</div>
+          </td>
+          <td></td>
+          <td class="class-slot lab rescheduled" data-course="Data Structures Lab" data-type="Lab" data-time="2:00 - 4:00" data-room="CL-3" data-faculty="Ayush Sharma" data-status="Rescheduled" onclick="openClassDetails(this)">
+            Data Structures Lab (CL-3)
+            <div class="faculty-name">Ayush Sharma</div>
+          </td>
+          <td class="class-slot lab" data-course="C Programming Lab" data-type="Lab" data-time="2:00 - 4:00" data-room="CL-2" data-faculty="Ravindra Bhatt" onclick="openClassDetails(this)">
+            C Programming Lab (CL-2)
+            <div class="faculty-name">Ravindra Bhatt</div>
+          </td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Class Details Modal -->
+  <div id="classDetailsModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">Class Details</div>
+        <button class="close-modal" onclick="closeModal('classDetailsModal')">&times;</button>
+      </div>
+      <div class="form-group">
+        <label>Course:</label>
+        <p id="modal-course"></p>
+      </div>
+      <div class="form-group">
+        <label>Type:</label>
+        <p id="modal-type"></p>
+      </div>
+      <div class="form-group">
+        <label>Time:</label>
+        <p id="modal-time"></p>
+      </div>
+      <div class="form-group">
+        <label>Room:</label>
+        <p id="modal-room"></p>
+      </div>
+      <div class="form-group">
+        <label>Faculty:</label>
+        <p id="modal-faculty"></p>
+      </div>
+      <div class="form-group" id="modal-status-container" style="display:none;">
+        <label>Status:</label>
+        <p id="modal-status"></p>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="primary-button" onclick="closeModal('classDetailsModal')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reschedule Modal -->
+  <div id="rescheduleModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">Reschedule Notice</div>
+        <button class="close-modal" onclick="closeModal('rescheduleModal')">&times;</button>
+      </div>
+      <div class="form-group">
+        <p>The Data Structures Lab originally scheduled for Thursday 2:00-4:00 has been rescheduled to:</p>
+        <p><strong>Friday 2:00-4:00 in CL-3</strong></p>
+        <p>Faculty: Ayush Sharma</p>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="primary-button" onclick="closeModal('rescheduleModal')">Acknowledge</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openModal(modalId) {
+      document.getElementById(modalId).style.display = 'flex';
+    }
+
+    function closeModal(modalId) {
+      document.getElementById(modalId).style.display = 'none';
+    }
+
+    function openClassDetails(element) {
+      document.getElementById('modal-course').textContent = element.dataset.course;
+      document.getElementById('modal-type').textContent = element.dataset.type;
+      document.getElementById('modal-time').textContent = element.dataset.time;
+      document.getElementById('modal-room').textContent = element.dataset.room;
+      document.getElementById('modal-faculty').textContent = element.dataset.faculty;
+
+      if (element.dataset.status) {
+        document.getElementById('modal-status-container').style.display = 'block';
+        document.getElementById('modal-status').textContent = element.dataset.status;
+      } else {
+        document.getElementById('modal-status-container').style.display = 'none';
+      }
+
+      openModal('classDetailsModal');
+    }
+
+    window.onclick = function(event) {
+      if (event.target.className === 'modal') {
+        event.target.style.display = 'none';
+      }
+    }
+
+    function updateSchedule() {
+      const selectedDay = document.getElementById('day').value;
+      console.log('Loading schedule for:', selectedDay);
+    }
+
+    window.onload = function() {
+      updateSchedule();
+    }
+  </script>
+</body>
+</html>
+    background-color: #f5f5f5;
             color: #333;
         }
       
