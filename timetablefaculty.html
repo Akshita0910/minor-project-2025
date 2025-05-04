@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Dashboard - Timetable</title>
+    <title>Faculty Dashboard - Timetable</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -37,7 +37,7 @@
         }
         
         .nav-tab.active {
-            color: #0a1155;
+            color: #1a237e;
             font-weight: bold;
         }
         
@@ -48,7 +48,7 @@
             left: 0;
             width: 100%;
             height: 3px;
-            background-color: #0a1155;
+            background-color: #1a237e;
         }
         
         .nav-tab:hover:not(.active) {
@@ -131,7 +131,7 @@
         }
         
         .day-btn.active {
-            background-color: #0a1155;
+            background-color: #1a237e;
             color: white;
         }
         
@@ -150,7 +150,7 @@
         th {
             background-color: #f8f8f8;
             font-weight: bold;
-            color: #0a1155;
+            color: #1a237e;
         }
         
         tr:nth-child(even) {
@@ -191,7 +191,7 @@
             font-size: 14px;
         }
         
-        .faculty-name {
+        .batch-name {
             font-size: 12px;
             color: #666;
             margin-top: 3px;
@@ -234,7 +234,7 @@
         
         .modal-title {
             font-size: 20px;
-            color: #0a1155;
+            color: #1a237e;
             font-weight: bold;
         }
         
@@ -252,7 +252,40 @@
         }
         
         .modal-body strong {
-            color: #0a1155;
+            color: #1a237e;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-primary {
+            background-color: #1a237e;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #303f9f;
+        }
+        
+        .btn-secondary {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #e0e0e0;
         }
     </style>
 </head>
@@ -261,7 +294,7 @@
         <div class="nav-tabs">
             <div class="nav-tab">Home</div>
             <div class="nav-tab active">Dashboard</div>
-            <div class="nav-tab">My Schedule</div>
+            <div class="nav-tab">Schedule a Class</div>
         </div>
         <div class="settings">
             <img class="icon notification-icon" src="https://static.vecteezy.com/system/resources/previews/002/359/770/non_2x/bell-icon-free-vector.jpg" alt="Notifications">
@@ -270,7 +303,7 @@
         </div>
     </div>
     
-    <div class="welcome">Welcome, Student!</div>
+    <div class="welcome">Welcome, Faculty!</div>
     
     <div class="timetable-container">
         <div class="timetable-title">
@@ -300,14 +333,14 @@
             <tbody>
                 <tr>
                     <td>9:00 - 10:00</td>
-                    <td class="lecture rescheduled" onclick="openClassDetails('Data Structures', 'Lecture', '9:00-10:00', 'CR-5', 'Nancy Singla', 'Rescheduled from original time')">
+                    <td class="lecture rescheduled" onclick="openClassDetails('Data Structures', 'Lecture', '9:00-10:00', 'CR-5', '24A11', 'Rescheduled to Sat 10:00-11:00')">
                         <div class="class-info">Data Structures</div>
-                        <div class="faculty-name">Nancy Singla</div>
+                        <div class="batch-name">Batch: 24A11</div>
                         <div class="room-number">CR-5</div>
                     </td>
-                    <td class="lecture" onclick="openClassDetails('C Programming', 'Lecture', '9:00-10:00', 'CR-3', 'Ravindra Bhatt')">
+                    <td class="lecture" onclick="openClassDetails('C Programming', 'Lecture', '9:00-10:00', 'CR-3', '24A12')">
                         <div class="class-info">C Programming</div>
-                        <div class="faculty-name">Ravindra Bhatt</div>
+                        <div class="batch-name">Batch: 24A12</div>
                         <div class="room-number">CR-3</div>
                     </td>
                     <td></td>
@@ -318,77 +351,87 @@
                 <tr>
                     <td>10:00 - 11:00</td>
                     <td></td>
-                    <td class="lecture" onclick="openClassDetails('Data Structures', 'Lecture', '10:00-11:00', 'CR-3', 'Ayush Sharma')">
+                    <td class="lecture" onclick="openClassDetails('Data Structures', 'Lecture', '10:00-11:00', 'CR-3', '24A13')">
                         <div class="class-info">Data Structures</div>
-                        <div class="faculty-name">Ayush Sharma</div>
+                        <div class="batch-name">Batch: 24A13</div>
                         <div class="room-number">CR-3</div>
                     </td>
-                    <td class="lecture" onclick="openClassDetails('C Programming', 'Lecture', '10:00-11:00', 'CR-5', 'Faisal Firdous')">
+                    <td class="lecture" onclick="openClassDetails('C Programming', 'Lecture', '10:00-11:00', 'CR-5', '24A14')">
                         <div class="class-info">C Programming</div>
-                        <div class="faculty-name">Faisal Firdous</div>
+                        <div class="batch-name">Batch: 24A14</div>
                         <div class="room-number">CR-5</div>
                     </td>
                     <td></td>
-                    <td class="lecture rescheduled" onclick="openClassDetails('Data Structures', 'Lecture', '10:00-11:00', 'CR-7', 'Nancy Singla', 'Rescheduled from Monday 9:00-10:00')">
+                    <td class="lecture rescheduled" onclick="openClassDetails('Data Structures', 'Lecture', '10:00-11:00', 'CR-7', '24A11', 'Rescheduled from Mon 9:00-10:00')">
                         <div class="class-info">Data Structures</div>
-                        <div class="faculty-name">Nancy Singla</div>
+                        <div class="batch-name">Batch: 24A11</div>
                         <div class="room-number">CR-7</div>
                     </td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>11:00 - 12:00</td>
-                    <td class="lab" onclick="openClassDetails('C Programming', 'Lab', '11:00-12:00', 'CL-1', 'Amol Vasudeva')">
+                    <td class="lab" onclick="openClassDetails('C Programming', 'Lab', '11:00-12:00', 'CL-1', '24A15')">
                         <div class="class-info">C Programming Lab</div>
-                        <div class="faculty-name">Amol Vasudeva</div>
+                        <div class="batch-name">Batch: 24A15</div>
                         <div class="room-number">CL-1</div>
                     </td>
                     <td></td>
-                    <td class="lab" onclick="openClassDetails('Data Structures', 'Lab', '11:00-12:00', 'CL-2', 'Ayush Sharma')">
+                    <td class="lab" onclick="openClassDetails('Data Structures', 'Lab', '11:00-12:00', 'CL-2', '24A16')">
                         <div class="class-info">Data Structures Lab</div>
-                        <div class="faculty-name">Ayush Sharma</div>
+                        <div class="batch-name">Batch: 24A16</div>
                         <div class="room-number">CL-2</div>
                     </td>
                     <td></td>
                     <td></td>
-                    <td class="lab" onclick="openClassDetails('C Programming', 'Lab', '11:00-12:00', 'CL-1', 'Faisal Firdous')">
+                    <td class="lab" onclick="openClassDetails('C Programming', 'Lab', '11:00-12:00', 'CL-1', '24A17')">
                         <div class="class-info">C Programming Lab</div>
-                        <div class="faculty-name">Faisal Firdous</div>
+                        <div class="batch-name">Batch: 24A17</div>
                         <div class="room-number">CL-1</div>
                     </td>
                 </tr>
-
                 <tr>
                     <td>2:00 - 4:00</td>
                     <td></td>
-                   
-                    <td class="lecture" onclick="openClassDetails('C Programming', 'Lecture', '10:00-11:00', 'CR-5', 'Faisal Firdous')">
-                        <div class="class-info">C Programming</div>
-                        <div class="faculty-name">Faisal Firdous</div>
-                        <div class="room-number">CR-5</div>
+                    <td class="lab" onclick="openClassDetails('C Programming', 'Lab', '2:00-4:00', 'CL-9', '24J11')">
+                        <div class="class-info">C Programming Lab</div>
+                        <div class="batch-name">Batch: 24J11</div>
+                        <div class="room-number">CL-9</div>
                     </td>
                     <td></td>
                     <td></td>
-                    <td></td>
-                    <td></td>
+                    <td class="lab" onclick="openClassDetails('Data Structures', 'Lab', '2:00-4:00', 'CL-7', '24A12')">
+                        <div class="class-info">Data Structures Lab</div>
+                        <div class="batch-name">Batch: 24A12</div>
+                        <div class="room-number">CL-7</div>
+                    </td>
+                    
+                    <td class="lab" onclick="openClassDetails('C Programming', 'Lab', '2:00-4:00', 'CL-1', '24A17')">
+                        <div class="class-info">C Programming Lab</div>
+                        <div class="batch-name">Batch: 24A17</div>
+                        <div class="room-number">CL-1</div>
+                    </td>
                 </tr>
-
                 <tr>
                     <td>4:00 - 5:00</td>
+                    <td class="lab" onclick="openClassDetails('C Programming', 'lectrure', '4:00-5:00', 'CR-10', '24A15')">
+                        <div class="class-info">C Programming </div>
+                        <div class="batch-name">Batch: 24A15</div>
+                        <div class="room-number">CR-10</div>
+                    </td>
                     <td></td>
-                    <td class="lecture" onclick="openClassDetails('Data Structures', 'Lecture', '10:00-11:00', 'CR-3', 'Ayush Sharma')">
+                    <td class="lab" onclick="openClassDetails('Data Structures', 'lecture', '4:00-5:00', 'CR-1', '24A16')">
                         <div class="class-info">Data Structures</div>
-                        <div class="faculty-name">Ayush Sharma</div>
-                        <div class="room-number">CR-3</div>
-                    </td>
-                    <td class="lecture" onclick="openClassDetails('C Programming', 'Lecture', '10:00-11:00', 'CR-5', 'Faisal Firdous')">
-                        <div class="class-info">C Programming</div>
-                        <div class="faculty-name">Faisal Firdous</div>
-                        <div class="room-number">CR-5</div>
+                        <div class="batch-name">Batch: 24A16</div>
+                        <div class="room-number">CR-1</div>
                     </td>
                     <td></td>
                     <td></td>
-                    <td></td>
+                    <td class="lab" onclick="openClassDetails('C Programming', 'lecture', '4:00-5:00', 'CR-12', '24A10')">
+                        <div class="class-info">C Programming </div>
+                        <div class="batch-name">Batch: 24A10</div>
+                        <div class="room-number">CR-12</div>
+                    </td>
                 </tr>
                 <!-- Additional rows would continue here -->
             </tbody>
@@ -407,19 +450,23 @@
                 <p><strong>Type:</strong> <span id="modal-type">Lecture</span></p>
                 <p><strong>Time:</strong> <span id="modal-time">10:00-11:00</span></p>
                 <p><strong>Room:</strong> <span id="modal-room">CR-7</span></p>
-                <p><strong>Faculty:</strong> <span id="modal-faculty">Nancy Singla</span></p>
-                <p id="modal-status"><strong>Status:</strong> <span id="modal-status-text">Regular schedule</span></p>
+                <p><strong>Batch:</strong> <span id="modal-batch">24A11</span></p>
+                <p id="modal-status"><strong>Status:</strong> <span id="modal-status-text">Rescheduled from Mon 9:00-10:00</span></p>
+            </div>
+            <div class="action-buttons">
+                <button class="btn btn-secondary" onclick="closeModal('classDetailsModal')">Close</button>
+                <button class="btn btn-primary" onclick="rescheduleClass()">Reschedule</button>
             </div>
         </div>
     </div>
 
     <script>
-        function openClassDetails(course, type, time, room, faculty, status = null) {
+        function openClassDetails(course, type, time, room, batch, status = null) {
             document.getElementById('modal-course').textContent = course;
             document.getElementById('modal-type').textContent = type;
             document.getElementById('modal-time').textContent = time;
             document.getElementById('modal-room').textContent = room;
-            document.getElementById('modal-faculty').textContent = faculty;
+            document.getElementById('modal-batch').textContent = batch;
             
             if (status) {
                 document.getElementById('modal-status-text').textContent = status;
@@ -437,6 +484,11 @@
         
         function closeModal(modalId) {
             document.getElementById(modalId).style.display = 'none';
+        }
+        
+        function rescheduleClass() {
+            alert("Reschedule functionality would open in a real implementation");
+            // This would open a rescheduling interface
         }
         
         // Close modal when clicking outside of it
