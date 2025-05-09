@@ -118,7 +118,36 @@ CREATE TABLE Timetable (
     FOREIGN KEY (batch_code) REFERENCES Batches(batch_code)
 );
 
--- Add Timetable entries here (already provided above)
+INSERT INTO Timetable (day_of_week, start_time, end_time, subject_code, faculty_id, batch_code, room) VALUES
+('Monday', '09:00:00', '11:00:00', '18B17CI271', 'AVA', '24A11', 'CL7'),
+('Thursday', '15:00:00', '17:00:00', '18B17CI271', 'AVA', '24A11', 'CL7'),
+('Tuesday', '16:00:00', '17:00:00', '18B11CI211', 'AVA', '24A11', 'CR5'),
+('Thursday', '09:00:00', '10:00:00', '18B11CI211', 'AVA', '24A11', 'CR5'),
+('Friday', '15:00:00', '16:00:00', '18B11CI211', 'AVA', '24A11', 'CR5'),
+
+('Monday', '11:00:00', '13:00:00', '18B17CI271', 'GRN', '24J11', 'CL8'),
+('Wednesday', '15:00:00', '17:00:00', '18B17CI271', 'GRN', '24J11', 'CL9'),
+('Tuesday', '15:00:00', '16:00:00', '18B11CI211', 'GRN', '24J11', 'CR5'),
+('Wednesday', '09:00:00', '10:00:00', '18B11CI211', 'GRN', '24J11', 'CR5'),
+('Friday', '09:00:00', '10:00:00', '18B11CI211', 'GRN', '24J11', 'CR5'),
+
+('Thursday', '11:00:00', '13:00:00', '18B17CI271', 'GRN', '24K11', 'CL9'),
+('Friday', '11:00:00', '13:00:00', '18B17CI271', 'GRN', '24K11', 'CL9'),
+('Tuesday', '15:00:00', '16:00:00', '18B11CI211', 'GRN', '24K11', 'CR5'),
+('Wednesday', '09:00:00', '10:00:00', '18B11CI211', 'GRN', '24K11', 'CR5'),
+('Friday', '09:00:00', '10:00:00', '18B11CI211', 'GRN', '24K11', 'CR5'),
+
+('Thursday', '11:00:00', '13:00:00', '18B17CI271', 'AKJ', '24I13', 'CL4'),
+('Thursday', '15:00:00', '17:00:00', '18B17CI271', 'AKJ', '24I13', 'CL9'),
+('Monday', '09:00:00', '10:00:00', '18B11CI211', 'AKJ', '24I13', 'CR9'),
+('Wednesday', '11:00:00', '12:00:00', '18B11CI211', 'AKJ', '24I13', 'CR2'),
+('Friday', '13:00:00', '14:00:00', '18B11CI211', 'AKJ', '24I13', 'CR9'),
+
+('Tuesday', '13:00:00', '15:00:00', '18B17CI271', 'AKJ', '24I11', 'CL4'),
+('Thursday', '15:00:00', '17:00:00', '18B17CI271', 'AKJ', '24I11', 'CL4'),
+('Monday', '09:00:00', '10:00:00', '18B11CI211', 'AKJ', '24I11', 'CR9'),
+('Wednesday', '11:00:00', '12:00:00', '18B11CI211', 'AKJ', '24I11', 'CR2'),
+('Friday', '13:00:00', '14:00:00', '18B11CI211', 'AKJ', '24I11', 'CR9');
 
 -- ===================== RESCHEDULE LOGS =====================
 CREATE TABLE RescheduleLogs (
